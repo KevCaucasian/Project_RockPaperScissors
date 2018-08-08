@@ -1,0 +1,42 @@
+switch (player) {
+	case 'Rock': 
+		if (Computer == 'Scissors') {
+			playerpoints++
+		return "You Win! Rock beats Scissors"
+		}
+		else if (Computer == 'Paper') {
+			computerpoints++
+		return "You Lose! Paper beats Rock"
+		}
+		else  {
+			return "it's a Tie!"
+		}
+		break
+
+	case 'Paper':
+		if (Computer == 'Rock') {
+			playerpoints++
+		return "You win! Paper beats Rock"
+		}
+		else if (Computer == 'Scissors') {
+			computerpoints++
+		return "You Lose! Scissors beats Paper"
+		}
+		else  {
+			return "it's a Tie!"
+		}
+		break
+
+	case 'Scissors':
+		if (Computer == 'Paper') {
+			playerpoints++
+			return "You Win! Scissors beats Paper"
+		}
+		else if (Computer == 'Rock') {
+			computerpoints++
+			return "You lose! Rock beats scissors"
+		}
+		else {
+			return "it's a Tie!"
+		}
+	}	
