@@ -9,75 +9,66 @@
 
 <script type="text/javascript">
 
-function ComputerPlay() {
+let playerScore =  0;
+let computerScore = 0;
 
-	let numb = Math.floor(Math.random()*3);
-		if (numb == 0) {
-			return "rock"
-		}
-		else if (numb == 1) {
-			return "paper"
-		}
-		else {
-			return "scissors"
-		}
-	} - - 
-
-function playerSelection() {
-
-	var option = prompt("Choose your weapon of choice: Rock, Paper or Scissors")
-	return playerChoice.toLowerCase();
-	}
-
-function singleRound(player, computer) {
-
-		if (player === computer) {
-           alert("it's a Draw!!!");
-           return 0;
-        }
-        if(    
-              (player === "rock" && computer === "scissors") || 
-              (player === "paper" && computer === "rock") ||
-              (player === "scissors" && computer === "paper") ) {
-                  alert(`player win this hand! \n ${player} beats ${computer}`);
-                  return 1;
-        }
-        else {  // if it's the other way around, the computer wins
-              alert(`computer win this hand! \n ${computer} beats ${player}`);
-              return 2;
-        }
-    }
-
-
-function game(x) {
-
-	do{
-
-		let player = playerSelection();
-		let computer = ComputerPlay();
-	}
-	
-			console.log(singleRound(player,computer))
-			console.log('Player: ' + playerpoints + ', Computer: ' + computerpoints)
-		}
-
-		if (playerpoints > computerpoints) {
-			console.log ('You Win!')
-		}
-		else if (computerpoints > playerpoints) {
-			console.log ('You Lose')
-		}
-		else {
-			console.log('Tie Game')
-	}
-
-
-let playerpoints = 0
-let computerpoints = 0
-game(5)
-
+function computerPlay() {
+	let drawArray = Array('rock', 'paper', 'scissors');
+    let randomNumber = Math.floor(Math.random() * 3);
+    let computerSelection = drawArray[randomNumber];
+    return computerSelection;
 }
 
+
+function game() {
+	while (playerScore + computerScore < 5) {
+
+		function playRound (playerSelection, computerSelection) {
+			let playerSelectionCase = playerSelection.toLowerCase();
+
+			if (playerSelectionCase === computerSelection) {
+				return 'Tie!';
+			}
+			else if (
+                (playerSelectionCase === 'rock' && computerSelection === 'scissors') ||
+                (playerSelectionCase === 'scissors' && computerSelection === 'paper') ||
+                (playerSelectionCase === 'paper' && computerSelection === 'stone')) {
+                playerScore = ++playerScore;
+                return `You win! ${playerSelection} beats ${computerSelection}. New scores are Player ${playerScore} and Computer ${computerScore}`;
+
+            } else if (
+                (playerSelectionCase === 'rock' && computerSelection === 'paper') ||
+                (playerSelectionCase === 'scissors' && computerSelection === 'rock') ||
+                (playerSelectionCase === 'paper' && computerSelection === 'scissors')) {
+                computerScore = ++computerScore;
+                return `Computer wins! ${playerSelection} beats ${computerSelection}. New scores are Player ${playerScore} and Computer ${computerScore}`;
+
+            } 
+            console.log(`Player: ${playerSelection} Computer: ${computerSelection} Playerscore: ${playerScore} Computerscore: ${computerScore}`);
+		}
+
+		let playerSelection = prompt("Choose your weapon: Rock, Paper or Scissors");
+				if (playerSelection === '' || playerSelection === null) {
+            alert('Tired yet');
+            break;
+
+		} let computerSelection = computerPlay();
+		console.log(playRound(playerSelection, computerSelection))
+	}
+	if ((playerScore > computerScore) && (playerScore + computerScore === 5)) {
+        console.log(`You are the winner! Your score ${playerScore}, Computer ${computerScore}.`)
+    } else if ((playerScore + computerScore === 5) && (computerScore > playerScore)) {
+        console.log(`The computer has won. Your score ${playerScore}, Computer ${computerScore}.`)
+    } else {
+        console.log(`You cancelled the game.`)
+    }
+}
+
+game();
+
+
+
 </script>
+
 </body>
 </html>
